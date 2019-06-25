@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Parallax</title>	
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+	<script src="../lib/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<div class="container">
+		<div class="cover">
+			<div class="bg"></div>
+			<div class="title"><h1>Parallax</h1></div>
+			<div class="right"></div>
+			<div class="left"></div>
+		</div>
+		<div class="text-cont">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione beatae dolorem placeat, cumque illo, possimus numquam odio optio tempore suscipit velit, voluptatem, minus ab facere laboriosam? Cum omnis fugit molestias est explicabo, repellat laudantium incidunt ea a. Accusamus perferendis sapiente quo itaque, unde quia nulla nam, dolor rem at adipisci dicta eos voluptas ipsum, sed odio excepturi. Aut neque provident id debitis quisquam. Adipisci quidem amet maiores, rerum. In atque odit, ab possimus recusandae nemo, dolorem porro neque minus aut consequatur, ea inventore pariatur corrupti sunt nostrum maiores magnam. Sequi quas repellendus vel fuga, sapiente hic est nam unde rem accusamus ipsa veniam repellat non iste assumenda iusto illum voluptatum. Nostrum consequatur iste, repellendus doloremque ipsam necessitatibus est dolorem sint.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione beatae dolorem placeat, cumque illo, possimus numquam odio optio tempore suscipit velit, voluptatem, minus ab facere laboriosam? Cum omnis fugit molestias est explicabo, repellat laudantium incidunt ea a. Accusamus perferendis sapiente quo itaque, unde quia nulla nam, dolor rem at adipisci dicta eos voluptas ipsum, sed odio excepturi. Aut neque provident id debitis quisquam. Adipisci quidem amet maiores, rerum. In atque odit, ab possimus recusandae nemo, dolorem porro neque minus aut consequatur, ea inventore pariatur corrupti sunt nostrum maiores magnam. Sequi quas repellendus vel fuga, sapiente hic est nam unde rem accusamus ipsa veniam repellat non iste assumenda iusto illum voluptatum. Nostrum consequatur iste, repellendus doloremque ipsam necessitatibus est dolorem sint.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione beatae dolorem placeat, cumque illo, possimus numquam odio optio tempore suscipit velit, voluptatem, minus ab facere laboriosam? Cum omnis fugit molestias est explicabo, repellat laudantium incidunt ea a. Accusamus perferendis sapiente quo itaque, unde quia nulla nam, dolor rem at adipisci dicta eos voluptas ipsum, sed odio excepturi. Aut neque provident id debitis quisquam. Adipisci quidem amet maiores, rerum. In atque odit, ab possimus recusandae nemo, dolorem porro neque minus aut consequatur, ea inventore pariatur corrupti sunt nostrum maiores magnam. Sequi quas repellendus vel fuga, sapiente hic est nam unde rem accusamus ipsa veniam repellat non iste assumenda iusto illum voluptatum. Nostrum consequatur iste, repellendus doloremque ipsam necessitatibus est dolorem sint.</p>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var scroll = $(window).scrollTop(),
+			dh = $(document).height(),
+			wh = $(window).height(),
+			value;
+
+		var windowsWidth = $(window).width();
+		var windowsHeight = $(window).height();
+		var initialWidth =	$('.left').width();
+		var initialHeight =	$('.left').height();
+
+
+		var x = ((initialWidth / windowsWidth) * 100);
+		var y = ((initialHeight / windowsHeight) * 100);
+
+
+		$(window).on('scroll', () => {
+			scroll = $(window).scrollTop();
+			dh = $(document).height();
+			wh = $('.cover').height();
+			value = ((scroll / (dh - wh)) * 100);
+
+			console.log((((value) * 1.1) + 40) + '%', ((100-value)/5) + '%');
+
+			if(((100-value)/5) > 0){
+				$('.left').css('left', ((100-value)/5) + '%');
+				$('.left').css('width', (x + (value)/10) + '%');
+				$('.left').css('height', (y + (value)/2) + '%');
+				$('.left').css('bottom', ((((value) * 0.3) + -10) * -1) + '%');
+
+
+				$('.right').css('right', ((100-value)/5) + '%');
+				$('.right').css('width', (x + (value)/8) + '%');
+				$('.right').css('height', (y + (value)/2) + '%');
+				$('.right').css('bottom', ((((value) * 0.3) + -10) * -1) + '%');
+
+				$('.bg').css('transform', 'scale(' + (1 + (value / 70)) + ')');
+
+				$('.title').css('bottom', (((value) * 0.9) + 40) + '%');
+				$('.title').css('transform', 'translate(-50%, 0) scale(' + (1 + (value / 70)) + ')');
+
+			}
+		});
+	</script>
+</body>
+</html>
